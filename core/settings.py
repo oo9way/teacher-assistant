@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(sn6-)7dns^eeg5*8&(nj=3=_*&=l!k!0k4u8&z1u%nunkgru1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['26a1-82-215-111-82.ngrok-free.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bot'
+    'bot',
+    'solo',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -117,8 +119,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_Telegram': [
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Link']},
+        ],
+        'toolbar': 'Telegram',
+    }
+}
