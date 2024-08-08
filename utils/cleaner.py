@@ -1,11 +1,9 @@
-def clean_tags(html):
-    html = str(html).replace("<h1>", "").replace("</h1>", "")
-    html = str(html).replace("<h2>", "").replace("</h2>", "")
-    html = str(html).replace("<h3>", "").replace("</h3>", "")
-    html = str(html).replace("<h4>", "").replace("</h4>", "")
-    html = str(html).replace("<h5>", "").replace("</h5>", "")
-    html = str(html).replace("<h6>", "").replace("</h6>", "")
-    html = str(html).replace("<p>", "").replace("</p>", "")
-    html = str(html).replace("<body>", "").replace("</body>", "")
+import bleach
 
-    return html
+def clean_content(content):
+    allowed_tags = ['b', 'strong', 'i', 'em', 'u', 'ins', 's', 'strike', 'del', 'span', 'tg-spoiler', 'a', 'code', 'pre']
+    allowed_attrs = {
+        'a': ['href'],
+        'span': ['class'],
+    }
+    return bleach.clean(content, tags=allowed_tags, attributes=allowed_attrs, strip=True)

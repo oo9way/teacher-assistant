@@ -15,6 +15,21 @@ class TelegramUser(models.Model):
         return f"{self.first_name} {self.last_name}"
     
 
+class Media(models.Model):
+    class MediaType(models.TextChoices):
+        file = "file", "File"
+        image = "image", "Image"
+    
+    file = models.FileField(upload_to="uploads")
+    media_type = models.CharField(choices=MediaType.choices)
+
+
+class Notification(models.Model):
+    pass
+
+
+
+
 class Photo(models.Model):
     image = models.ImageField(upload_to="gallery")
     promotion = models.ForeignKey("bot.Promotion", null=True, blank=True, related_name="images", on_delete=models.CASCADE)
