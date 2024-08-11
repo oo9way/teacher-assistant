@@ -1,6 +1,7 @@
 from bot.models import TelegramUser, Notification, Media
 from django.contrib import admin
 from bot.tasks import send_notification as send_notification_task
+from django.utils.safestring import mark_safe
 
 
 @admin.register(TelegramUser)
@@ -21,8 +22,11 @@ def send_notification(modeladmin, request, queryset):
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ("id", "message", "send_all", )
+    list_display = ("id", "get_notification_display", "send_all",)
     search_fields = ("receivers", "media", "message")
     fields = ("receivers", "send_all", "message")
     autocomplete_fields = ("receivers",)
     inlines = (MediaInline,)
+
+    def get_notification_display(self, obj):
+        return mark_safe(obj.message)
