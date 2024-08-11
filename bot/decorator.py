@@ -3,7 +3,7 @@ from bot.models import TelegramUser
 
 def get_user(func):
     def wrapper(update, context, *args, **kwargs):
-        user = update.message.from_user
+        user = update.message.from_user if update.message else update.callback_query.from_user
         first_name = user.first_name
         last_name = user.last_name
         telegram_id = user.id

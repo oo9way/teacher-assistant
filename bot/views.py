@@ -4,13 +4,13 @@ from ninja import NinjaAPI
 import json
 from django.http import JsonResponse
 
-
 from bot.dispatcher import dispatcher, bot
 from dotenv import load_dotenv
 
 load_dotenv()
 
 webhook = NinjaAPI()
+
 
 @webhook.post("/webhook")
 def message_handler(request):
