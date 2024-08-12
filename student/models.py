@@ -9,6 +9,7 @@ class StudentTask(models.Model):
     task: course_models.Task = models.ForeignKey(course_models.Task, on_delete=models.CASCADE)
     body = models.TextField()
     completed_at = models.DateTimeField(auto_now_add=True)
+    is_completed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.student.first_name

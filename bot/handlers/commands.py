@@ -16,4 +16,6 @@ def start(update, context, user):
             update.message.reply_text("Siz hech qanday guruhga a'zo emassiz. A'zo bo'lish uchun so'rov yuboring.",
                                       reply_markup=inline_groups())
             return None
-        pass
+
+        message = "Assalamu alaykum, botga xush kelibsiz"
+        update.message.reply_text(message, reply_markup=replies.student_main())

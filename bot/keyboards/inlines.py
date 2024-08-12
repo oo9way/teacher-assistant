@@ -22,3 +22,16 @@ def approve_student(student_id, group_id):
         ]
     ]
     return InlineKeyboardMarkup(keyboard)
+
+
+def uncompleted_tasks(tasks):
+    keyboard = []
+
+    for task in tasks:
+        keyboard.append(
+            [
+                InlineKeyboardButton(task.task.body[:100], callback_data=f'task_{task.id}')
+            ]
+        )
+
+    return InlineKeyboardMarkup(keyboard)
