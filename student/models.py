@@ -19,6 +19,8 @@ class StudentAnswer(models.Model):
     student: TelegramUser = models.ForeignKey(TelegramUser, on_delete=models.CASCADE)
     question: course_models.Question = models.ForeignKey(course_models.Question, on_delete=models.CASCADE)
     body = models.TextField()
+    is_correct = models.BooleanField(default=False)
+    is_checked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.student.first_name

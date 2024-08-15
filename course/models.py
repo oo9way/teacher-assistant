@@ -1,5 +1,5 @@
 from django.db import models
-
+from bot.models import TelegramUser
 
 class Course(models.Model):
     title = models.CharField(max_length=255)
@@ -34,8 +34,17 @@ class Lesson(models.Model):
         return self.title
 
 
+class QuestionSet(models.Model):
+    lesson: Lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name="questions")
+    title = models.CharField(max_length=255)
+    answered_students = models.ManyToManyField(TelegramUser, related_name="answered_question_sets", blank=True)
+
+    def __str__(self):
+        return self.title
+
+
 class Question(models.Model):
-    lesson: Lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    question_set: QuestionSet = models.ForeignKey(QuestionSet, on_delete=models.CASCADE, null=True, blank=True, related_name="questions")
     title = models.CharField(max_length=255)
 
     def __str__(self):
@@ -43,7 +52,7 @@ class Question(models.Model):
 
 
 class Task(models.Model):
-    lesson: Lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    lesson: Lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name="tasks")
     body = models.TextField()
 
     def __str__(self):

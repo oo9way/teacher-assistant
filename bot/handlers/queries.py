@@ -1,7 +1,7 @@
 from bot.decorator import get_user
 from group.models import Group
 from bot.utils import notify_admins
-from bot.keyboards import inlines
+from bot.keyboards import inlines, replies
 from bot.models import TelegramUser
 
 
@@ -18,6 +18,14 @@ def handle_callback_query(update, context, user):
         group_id = int(query.data.split("_")[2])
         student_id = int(query.data.split("_")[1])
         approve_or_reject_student(query, context, user, action=action, group_id=group_id, student_id=student_id)
+
+    if query.data.startswith("selectedgroup_"):
+        group_id = int(query.data.split("_")[1])
+        context.user_data["selected_group"] = group_id
+
+        query.answer()
+        query.message.reply_text("Guruhni tanlandi.", reply_markup=replies.teacher_main())
+        query.delete_message()
 
 
 def request_to_join(query, context, user, **kwargs):
