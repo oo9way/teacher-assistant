@@ -26,7 +26,13 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = ("body", "lesson__name",)
 
 
-@admin.register(models.Question)
-class QuestionAdmin(admin.ModelAdmin):
+class QuestionInline(admin.TabularInline):
+    model = models.Question
+    extra = 0
+
+
+@admin.register(models.QuestionSet)
+class QuestionSetAdmin(admin.ModelAdmin):
     list_display = ("title", "lesson",)
     search_fields = ("title", "lesson__title")
+    inlines = [QuestionInline]
