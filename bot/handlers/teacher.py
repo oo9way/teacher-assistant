@@ -81,7 +81,8 @@ def get_task_students(update, context, user):
 
         message = f"📖 {task.body}"
         students_tasks = StudentTask.objects.filter(task=task)
-        message = update.callback_query.message.reply_text(message, reply_markup=inlines.get_students_task_status(students_tasks))
+        message = update.callback_query.message.reply_text(message, reply_markup=inlines.get_students_task_status(
+            students_tasks))
         context.user_data["last_message_id"] = message.message_id
         update.callback_query.delete_message()
         return states.TEACHER_GET_TASK_DETAILS
@@ -160,5 +161,8 @@ def get_random_student(update, context, user):
     group = context.user_data.get("selected_group")
     group = Group.objects.get(id=group)
     students = group.members.all().order_by("?").first()
-    update.message.reply_text(f"📖 {students.first_name} {students.last_name}", reply_markup=replies.teacher_main())
+    if students:
+        update.message.reply_text(f"📖 {students.first_name} {students.last_name}", reply_markup=replies.teacher_main())
+        return states.END
+    update.message.reply_text("Guruhda o'quvchi mavjud emas", reply_markup=replies.teacher_main())
     return states.END
