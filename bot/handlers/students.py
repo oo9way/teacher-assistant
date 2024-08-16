@@ -4,7 +4,7 @@ from bot.keyboards import replies, inlines
 from student.models import StudentTask, StudentAnswer
 from course.models import Lesson, QuestionSet, Question
 from bot import states
-
+from utils.cleaner import clean_content
 
 @get_user
 def get_lessons(update, context, user):
@@ -18,7 +18,7 @@ def get_lessons(update, context, user):
     message = "👨‍💻 Darslar:\n\n"
     for lesson in lessons:
         message += f"b>{lesson.title}</b>\n"
-        message += f"{lesson.body}\n\n"
+        message += f"{clean_content(lesson.body)}\n\n"
 
     update.message.reply_text(message, parse_mode="HTML", reply_markup=replies.student_main())
     return None
