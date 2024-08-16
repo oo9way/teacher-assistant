@@ -8,7 +8,7 @@ from bot import states
 
 @get_user
 def get_lessons(update, context, user):
-    lessons = user.groups.first().finished_lessons.all()
+    lessons = user.groups.first().finished_lessons.all().order_by("-id")
 
     if not lessons:
         update.message.reply_text("Siz a'zo bo'lgan guruhda darslar hali boshlanmadi.",
@@ -17,7 +17,8 @@ def get_lessons(update, context, user):
 
     message = "👨‍💻 Darslar:\n\n"
     for lesson in lessons:
-        message += f"<a href='http://127.0.0.1:8000/admin/group/group/'>{lesson.title}</a>\n"
+        message += f"b>{lesson.title}</b>\n"
+        message += f"{lesson.body}\n\n"
 
     update.message.reply_text(message, parse_mode="HTML", reply_markup=replies.student_main())
     return None
