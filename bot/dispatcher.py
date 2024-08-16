@@ -17,6 +17,7 @@ dispatcher = Dispatcher(bot, None, workers=0)
 dispatcher.add_handler(CommandHandler("start", commands.start))
 dispatcher.add_handler(MessageHandler(Filters.text("📖 Darslar"), students.get_lessons))
 dispatcher.add_handler(MessageHandler(Filters.text("📝️️️️️️ Guruhni o'zgartirish"), teacher.get_groups))
+dispatcher.add_handler(MessageHandler(Filters.text("🔐 Tasodifiy ishtirokchilarni tanlash"), teacher.get_random_student))
 
 dispatcher.add_handler(ConversationHandler(
     entry_points=[MessageHandler(Filters.text("🔖 Natijalar"), students.get_results)],
