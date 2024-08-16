@@ -110,3 +110,5 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # set the celery timezone
 CELERY_TIMEZONE = 'UTC'
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://assistant.joseph.uz']
