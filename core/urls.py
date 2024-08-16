@@ -6,8 +6,8 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", webhook.urls)
+    path("telegram/", webhook.urls),
+    path('', admin.site.urls),
 ]
 
 
