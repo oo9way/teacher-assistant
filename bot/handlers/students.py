@@ -20,7 +20,7 @@ def get_lessons(update, context, user):
         message += f"b>{lesson.title}</b>\n"
         message += f"{clean_content(lesson.body)}\n\n"
 
-    update.message.reply_text(message, parse_mode="HTML", reply_markup=replies.student_main())
+    update.message.reply_text(message, parse_mode="html", reply_markup=replies.student_main())
     return None
 
 
