@@ -130,7 +130,6 @@ def get_task_details(update, context, user):
 def confirm_task(update, context, user):
     if update and update.message:
         if update.message.text == "⬅️ Orqaga":
-            print("Hoela")
             update.message.reply_text("Bosh menyu\nKerakli bo'limni tanlang.", reply_markup=replies.teacher_main())
             return states.END
 
@@ -154,3 +153,12 @@ def confirm_task(update, context, user):
             message, reply_markup=inlines.get_students_task_status(students_tasks))
         context.user_data["last_message_id"] = message.message_id
         return states.TEACHER_GET_TASK_DETAILS
+
+
+@get_user
+def get_random_student(update, context, user):
+    group = context.user_data.get("selected_group")
+    group = Group.objects.get(id=group)
+    students = group.members.all().order_by("?").first()
+    update.message.reply_text(f"📖 {students.first_name} {students.last_name}", reply_markup=replies.teacher_main())
+    return states.END

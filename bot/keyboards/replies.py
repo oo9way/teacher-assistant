@@ -44,10 +44,7 @@ def teacher_main():
                 KeyboardButton(text="📝️️️️️️ Guruhni o'zgartirish"),
                 KeyboardButton(text="📖 Topshiriqlar"),
             ],
-            [
-                KeyboardButton(text="🔖 Savollarni tekshirish"),
-                KeyboardButton(text="📝️️️️️️ Natijalarni ko'rish")
-             ],
+
             [KeyboardButton(text="🔐 Tasodifiy ishtirokchilarni tanlash"), ]
         ],
         resize_keyboard=True

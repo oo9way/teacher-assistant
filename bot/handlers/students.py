@@ -206,7 +206,7 @@ def get_answer(update, context, user):
 
     update.message.reply_text("✅ Siz barcha savollarga javob berdingiz.", reply_markup=replies.student_main())
     question_set.answered_students.add(user)
-    question_set.save(update_fields=["answered_students"])
+    question_set.save()
     return states.END
 
 
