@@ -17,9 +17,9 @@ def get_lessons(update, context, user):
 
     message = "👨‍💻 Darslar:\n\n"
     for lesson in lessons:
-        message += f"b>{lesson.title}</b>\n"
+        message += f"<b>{lesson.title}</b>\n"
         message += f"{clean_content(lesson.body)}\n\n"
-
+    print(message)
     update.message.reply_text(message, parse_mode="html", reply_markup=replies.student_main())
     return None
 
