@@ -41,7 +41,7 @@ def get_uncompleted_tasks(update, context, user):
     message = ""
     counter = 1
     for task in student_tasks:
-        message += f"{counter}. {task.task.body[:100]}\n"
+        message += f"{counter}. {task.task.body[:100]}\n\n"
         counter += 1
 
     update.message.reply_text(message, parse_mode="HTML", reply_markup=inlines.uncompleted_tasks(student_tasks))
